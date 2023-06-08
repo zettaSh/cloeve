@@ -1,0 +1,25 @@
+---
+name: cloeve
+
+# yamllint disable-line rule:truthy
+on:
+  # onl run this workflow on pull request events
+  pull_request:
+      types: [opened, closed]
+
+jobs:
+  opened-job:
+    runs-on: ubuntu-latest
+    # only run when a pull request is opened
+    if: github.event_name == 'pull_request' && github.event.action == 'opened'
+    steps:
+      - run: echo ${{ github.event_name }}
+      - run: echo ${{ github.event.action }}
+
+  closed-job:
+    runs-on: ubuntu-latest
+    # only run when a pull request is closed
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    steps:
+      - run: echo ${{ github.event_name }}
+      - run: echo ${{ github.event.action }}
